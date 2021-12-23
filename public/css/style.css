@@ -1,0 +1,59 @@
+.bg-blue {
+    background: #18045f ;
+}
+
+.bg-blue img{
+    border-radius: 25px;
+}
+
+.background img{
+    width: 100%;
+    height: 600px;
+}
+
+#form{
+    background: rgb(196, 201, 201);
+    border-radius: 20px;
+    width: 900px;
+}
+
+.profile img ,.profile_user img{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+
+.active{
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: green;
+}
+
+[v-cloak]{
+    display: none;
+}
+
+.bg_edit{
+    background-color: rgba(0, 128, 0, 0.658);
+}
+
+.bg_delete{
+    background-color: rgba(255, 0, 0, 0.692);
+}
+
+.bg_delete,.bg_edit{
+    border-radius: 20px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-green{
+    background-color: blue;
+    padding: 4px;
+    border-radius: 20px;
+}

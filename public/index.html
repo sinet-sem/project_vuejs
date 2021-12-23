@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app" v-cloak>
+
+        <nav class="navbar navbar-light bg-blue">
+            <a class="navbar-brand text-white" href="#">
+                <img src="images/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                POST APP
+            </a>
+
+            <form class="form-inline" v-if = "!isLogin">
+                <input class="form-control mr-sm-2" type="text" placeholder="Username" v-model="username_post" >
+                <button class="btn btn-success my-2 my-sm-0" type="button" @click="Login" v-bind:disabled="username_post===''">Login</button>
+              </form>
+            <form class="form-inline" v-else>
+                <button class="btn btn-success my-2 my-sm-0" type="button" @click="Logout">Logout</button>
+            </form>
+          
+        </nav>
+        <!-- form -->
+        
+        <div class="container p-3 mt-5" id="form" v-if="isShow">
+            <h2 class="action d-flex justify-content-center align-items-center ">Create New Post</h2>
+            <form>
+                <div class="form-group">
+                    <textarea id="para" class="form-control" placeholder="What is in your mind?" v-model = "content_post" ></textarea>
+                    <input type="file" class="mt-3" >
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info btn-block" type="button" @click="Add_post" v-if = "!isedit" v-bind:disabled="content_post===''">Add Post</button>
+                    <button class="btn btn-info btn-block" type="button"  @click="UpdatePost" v-else v-bind:disabled="content_post===''">Update Post </button>
+                </div>
+            </form>
+        </div>
+
+    <!-- Content -->
+        
+        <div class="container p-4" id="content" v-if="!isShow">
+            <div class="row">
+                <div class="col-12" >
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search Username" v-model="SearchName" v-on:keyup.enter="Search_Name" v-bind:disabled= "!isLogin">
+                    
+                    <div class=" action d-flex justify-content-between align-items-center mt-5">
+                        <div class="profile_user ml-3" >
+                            <img src="https://thenationstimes.in/wp-content/uploads/2021/06/20210605_155233.jpeg" alt="">
+                            <span><strong>{{getUsername}}</strong></span>
+                        </div>
+                        <div>
+                            <button class="btn btn-info " type="button" @click= "Create" v-bind:disabled="!isLogin">CREATE</button>
+                        </div>   
+                    </div>
+                    <div class="card shadow-sm mt-3" v-for="(user, index) in users" :key="index">
+
+                        <div class="card-body">
+                            <div class="header d-flex justify-content-between align-items-center">
+                                <div class="profile">
+                                    <img src="https://data.whicdn.com/images/202636293/original.jpg" alt="" width="40" >
+                            
+                                    <strong><span>{{user.username}}</span></strong>
+                                </div>
+
+                                <div class="date-time ">
+                                    <span class="text-secondary">{{user.time}}</span>
+                                </div>
+                            </div>
+                            <br>
+                        
+                    
+                            <div class="content">
+                    
+                                <p>{{user.content}}</p>
+                            </div>
+                            <hr>
+                            <div class="action d-flex justify-content-between align-items-center">
+                                <div class="like">
+                                    <i class="fa fa-thumbs-up fa-xs text-white bg-green"></i>
+                                    <span>{{user.like}}</span>
+                                </div>
+                                <div class="countComment">
+                                    <span>100</span>
+                                    <span>comments</span>
+    
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <div class="footer d-flex justify-content-between align-items-center">
+                                <div >
+                                    <a href="#" @click="Like(user)">
+                                        <i class="fa fa-thumbs-up fa-lg" v-if="isLogin"></i>
+                                    </a>
+                                    <span class="like">Like</span>
+                                </div>
+                                <div>
+                                   
+                                    <i class="fa fa-comment fa-lg text-primary"></i>
+                
+                                    <span class="comment">comment</span>
+                                </div>
+                                
+
+                                <div class="action d-flex justify-content-end align-items-center" v-if ="user.username===getUsername">
+                
+                                    <a href="#" class="mr-2 bg_edit"  @click= "edit_post(user)">
+                                        <i class="fa fa-pencil fa-lg text-white"></i>
+                                    </a>
+                                    <a href="#" class="mr-2 bg_delete text-white" @click = "deletePost(user.id)" >
+                                       <i class="fa fa-trash fa-lg" ></i>
+                                    </a>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>  
+</body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+
+<script src="js/vue.js"></script>
+</html>

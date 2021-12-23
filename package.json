@@ -1,0 +1,24 @@
+{
+  "name": "vuejs-c5-project-sinetsem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PNC-WEP/vuejs-c5-project-sinetsem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PNC-WEP/vuejs-c5-project-sinetsem/issues"
+  },
+  "homepage": "https://github.com/PNC-WEP/vuejs-c5-project-sinetsem#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.9"
+  }
+}
